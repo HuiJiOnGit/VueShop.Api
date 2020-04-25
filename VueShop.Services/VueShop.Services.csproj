@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\VueShop.Common\VueShop.Common.csproj" />
     <ProjectReference Include="..\VueShop.IRepository\VueShop.IRepository.csproj" />
     <ProjectReference Include="..\VueShop.IServices\VueShop.IServices.csproj" />
     <ProjectReference Include="..\VueShop.Model\VueShop.Model.csproj" />

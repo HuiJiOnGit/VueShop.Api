@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VueShop.Api</name>
+    </assembly>
+    <members>
+        <member name="T:VueShop.Api.Controllers.LoginController">
+            <summary>
+            login
+            </summary>
+        </member>
+        <member name="M:VueShop.Api.Controllers.LoginController.#ctor(VueShop.IServices.IUserServices,Microsoft.Extensions.Logging.ILogger{VueShop.Api.Controllers.LoginController})">
+            <summary>
+            ctor
+            </summary>
+            <param name="userServices"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:VueShop.Api.Controllers.LoginController.Login(VueShop.Model.ViewModels.LoginViewModel)">
+            <summary>
+            登陆
+            </summary>
+            <param name="loginViewModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VueShop.Api.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            This method gets called by the runtime. Use this method to add services to the container.
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:VueShop.Api.Startup.ConfigureContainer(Autofac.ContainerBuilder)">
+            <summary>
+             autofac服务工厂
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="M:VueShop.Api.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+        </member>
+    </members>
+</doc>

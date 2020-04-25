@@ -1,64 +1,57 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using VueShop.Api.AuthorizationHelper.Jwt;
 using VueShop.IServices;
 using VueShop.Model.ViewModels;
 
 namespace VueShop.Api.Controllers
 {
-    [Route("api")]
+    /// <summary>
+    /// login
+    /// </summary>
+    [Route("api/login")]
     [ApiController]
     public class LoginController : ControllerBase
     {
         private readonly IUserServices userServices;
         private readonly ILogger<LoginController> logger;
 
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="userServices"></param>
+        /// <param name="logger"></param>
         public LoginController(IUserServices userServices, ILogger<LoginController> logger)
         {
             this.userServices = userServices;
             this.logger = logger;
         }
 
-        [HttpGet("getvalue")]
-        public async Task<ActionResult<LoginViewModel>> GetValue()
-        {
-            var user = await userServices.Query(n => n.username == "admin");
-            var result = new LoginViewModel();
-            if (user != null)
-            {
-                foreach (var item in user)
-                {
-                    result.UserName = item.username;
-                    result.Password = item.password;
-                }
-                return Ok(result);
-            }
-            return NotFound();
-        }
-
+        /// <summary>
+        /// 登陆
+        /// </summary>
+        /// <param name="loginViewModel"></param>
+        /// <returns></returns>
         [HttpPost]
-        [Route(nameof(Login))]
-        public async Task<ActionResult<LoginViewModel>> Login([FromBody] LoginViewModel loginView)
+        public async Task<IActionResult> Login([FromBody]LoginViewModel loginViewModel)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
-
-            var user = await userServices.Query(n => n.username == loginView.UserName && n.password == loginView.Password);
-
+            var user = await userServices.GetUser(loginViewModel);
             if (user != null)
             {
-                return Ok();
+                string result = $"Beaner {JwtHelper.CreateJwt(user.UserName)}";
+                return Ok(result);
             }
-            else
-            {
-                return NotFound();
-            }
+            return NotFound();
         }
     }
 }

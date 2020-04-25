@@ -5,7 +5,7 @@ using VueShop.Model.DBModels;
 
 namespace VueShop.IRepository
 {
-    public interface IUserRepository : IBaseRepository<sp_user>
+    public interface IUserRepository : IBaseRepository<sp_manager>
     {
     }
 }

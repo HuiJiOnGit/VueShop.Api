@@ -7,7 +7,7 @@ using VueShop.Model.DBModels;
 
 namespace VueShop.Repository
 {
-    public class UserRepository : BaseRepository<sp_user>, IUserRepository
+    public class UserRepository : BaseRepository<sp_manager>, IUserRepository
     {
         public UserRepository(ISqlSugarClient sqlSugarClient) : base(sqlSugarClient)
         {
