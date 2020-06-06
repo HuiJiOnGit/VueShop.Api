@@ -21,16 +21,19 @@ namespace VueShop.Api.Controllers
     {
         private readonly IUserServices userServices;
         private readonly ILogger<LoginController> logger;
+        private readonly JwtHelper jwtHelper;
 
         /// <summary>
         /// ctor
         /// </summary>
         /// <param name="userServices"></param>
         /// <param name="logger"></param>
-        public LoginController(IUserServices userServices, ILogger<LoginController> logger)
+        /// <param name="jwtHelper"></param>
+        public LoginController(IUserServices userServices, ILogger<LoginController> logger, JwtHelper jwtHelper)
         {
             this.userServices = userServices;
             this.logger = logger;
+            this.jwtHelper = jwtHelper;
         }
 
         /// <summary>
@@ -39,7 +42,7 @@ namespace VueShop.Api.Controllers
         /// <param name="loginViewModel"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Login([FromBody]LoginViewModel loginViewModel)
+        public async Task<IActionResult> Login([FromBody] LoginViewModel loginViewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -48,7 +51,7 @@ namespace VueShop.Api.Controllers
             var user = await userServices.GetUser(loginViewModel);
             if (user != null)
             {
-                string result = $"Beaner {JwtHelper.CreateJwt(user.UserName)}";
+                string result = $"Beaner {jwtHelper.CreateJwt(user.UserName)}";
                 return Ok(result);
             }
             return NotFound();

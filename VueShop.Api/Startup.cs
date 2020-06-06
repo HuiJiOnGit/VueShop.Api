@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SqlSugar;
+using VueShop.Api.Extensions;
 
 namespace VueShop.Api
 {
@@ -32,45 +33,10 @@ namespace VueShop.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            // 注入sqlsugar
-            services.AddScoped<ISqlSugarClient>(option =>
-            {
-                var config = new ConnectionConfig()
-                {
-                    ConnectionString = Configuration.GetConnectionString("mydbConnectionString"),
-                    DbType = DbType.MySql,
-                    InitKeyType = InitKeyType.Attribute,//从特性读取主键和自增列信息
-                    IsAutoCloseConnection = true,//开启自动释放模式和EF原理一样我就不多解释了
-                };
-                return new SqlSugarClient(config);
-            });
-            // 添加swagger
-            services.AddSwaggerGen(config =>
-            {
-                config.SwaggerDoc("V1", new OpenApiInfo { Title = "VusShop.Api", Version = "v1" });
-            });
-
-            //添加jwt验证
-            services.AddAuthentication(option =>
-            {
-                option.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(option =>
-            {
-                var securityKey = Configuration["TokenSetting:SecurityKey"];
-                var issuser = Configuration["TokenSetting:Issuer"];
-                var audience = Configuration["TokenSetting:Audience"];
-                option.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidIssuer = issuser,//发行人
-                    ValidAudience = audience,//订阅人
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(securityKey)),//密钥
-                    ClockSkew = TimeSpan.FromHours(1),//过期时间
-                    ValidateLifetime = true,//是否验证过期时间
-                    ValidateIssuer = true,//是否验证发行人
-                    ValidateAudience = true,//是否验证订阅人
-                };
-            });
+            services.AddHelpSetup();
+            services.AddSqlsugarSetup(Configuration);
+            services.AddSwaggerSetup();
+            services.AddAuthorizationSetup(Configuration);
         }
 
         /// <summary>

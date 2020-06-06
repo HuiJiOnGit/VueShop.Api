@@ -21,7 +21,7 @@ namespace VueShop.Api.AuthorizationHelper.Jwt
             this.configuration = configuration;
         }
 
-        public static string CreateJwt(string userName)
+        public string CreateJwt(string userName)
         {
             var (key, iss, aud) = new ValueTuple<string, string, string>("zheshiyige16weidemiyao", "http://localhost:5000", "http://localhost:5000");
 
