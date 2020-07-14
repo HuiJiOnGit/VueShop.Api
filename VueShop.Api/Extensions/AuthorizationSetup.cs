@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using VueShop.Api.Extensions.Authorizations;
+using VueShop.Services;
 
 namespace VueShop.Api.Extensions
 {
@@ -15,6 +17,11 @@ namespace VueShop.Api.Extensions
     /// </summary>
     public static class AuthorizationSetup
     {
+        /// <summary>
+        /// authorization注册
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
         public static void AddAuthorizationSetup(this IServiceCollection services, IConfiguration configuration)
         {
             if (services == null)
@@ -43,6 +50,51 @@ namespace VueShop.Api.Extensions
                     ValidateAudience = true,//是否验证订阅人
                 };
             });
+
+            #region 添加授权
+
+            //1、直接在控制器或者方法上添加[authorize]就是简单的授权了,验证是否登录
+
+            //2、基于角色的授权
+            //[Authorize(Roles = "HRManager,Finance")]
+            //public class SalaryController : Controller
+            //基于策略的角色检查
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("RequireAdministratorRole",
+            //         policy => policy.RequireRole("Administrator"));
+            //});
+            // 使用
+            //[Authorize(Policy = "RequireAdministratorRole")]
+            //public IActionResult Shutdown()
+            //{
+            //    return View();
+            //}
+
+            //3、基于声明的授权
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("EmployeeOnly", policy => policy.RequireClaim("EmployeeNumber"));
+            //});
+            //[Authorize(Policy = "EmployeeOnly")]
+            //public IActionResult VacationBalance()
+            //{
+            //    return View();
+            //}
+
+            //4、基于策略的授权
+            //详细看这里 https://docs.microsoft.com/zh-cn/aspnet/core/security/authorization/policies?view=aspnetcore-3.1
+
+            //var permissionRuquired = new PermissionRequirement
+            //{
+            //}
+
+            //services.AddAuthorization(option =>
+            //{
+            //    option.AddPolicy("MyPermissions", policy => policy.Requirements.Add(new PermissionRequirement))
+            //});
+
+            #endregion 添加授权
         }
     }
 }

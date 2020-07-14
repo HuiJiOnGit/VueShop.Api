@@ -6,8 +6,16 @@ using SqlSugar;
 
 namespace VueShop.Api.Extensions
 {
+    /// <summary>
+    /// sqlsugar
+    /// </summary>
     public static class SqlsugarSetup
     {
+        /// <summary>
+        /// sqlsugar
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
         public static void AddSqlsugarSetup(this IServiceCollection services, IConfiguration configuration)
         {
             if (services == null)

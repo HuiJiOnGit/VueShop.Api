@@ -7,8 +7,15 @@ using VueShop.Api.AuthorizationHelper.Jwt;
 
 namespace VueShop.Api.Extensions
 {
+    /// <summary>
+    /// 各类help
+    /// </summary>
     public static class HelperSetup
     {
+        /// <summary>
+        /// help注入
+        /// </summary>
+        /// <param name="services"></param>
         public static void AddHelpSetup(this IServiceCollection services)
         {
             if (services == null)

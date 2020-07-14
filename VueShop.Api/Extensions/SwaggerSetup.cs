@@ -7,8 +7,15 @@ using Microsoft.OpenApi.Models;
 
 namespace VueShop.Api.Extensions
 {
+    /// <summary>
+    /// swagger
+    /// </summary>
     public static class SwaggerSetup
     {
+        /// <summary>
+        /// swagger
+        /// </summary>
+        /// <param name="services"></param>
         public static void AddSwaggerSetup(this IServiceCollection services)
         {
             if (services == null)

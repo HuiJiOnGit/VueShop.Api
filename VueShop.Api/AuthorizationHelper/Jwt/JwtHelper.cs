@@ -12,15 +12,27 @@ using VueShop.Model.ViewModels;
 
 namespace VueShop.Api.AuthorizationHelper.Jwt
 {
+    /// <summary>
+    ///
+    /// </summary>
     public class JwtHelper
     {
         private readonly IConfiguration configuration;
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="configuration"></param>
         public JwtHelper(IConfiguration configuration)
         {
             this.configuration = configuration;
         }
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
         public string CreateJwt(string userName)
         {
             var (key, iss, aud) = new ValueTuple<string, string, string>("zheshiyige16weidemiyao", "http://localhost:5000", "http://localhost:5000");
