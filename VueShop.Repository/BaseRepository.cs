@@ -11,9 +11,11 @@ namespace VueShop.Repository
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : class, new()
     {
-        public BaseRepository(ISqlSugarClient sqlSugarClient)
+        private readonly ISqlSugarClient _sqlSugarClient;
+        private readonly IUnitOfWork _unitOfWork;
+        public BaseRepository(IUnitOfWork unitOfWork)
         {
-            this.sqlSugarClient = sqlSugarClient;
+            _sqlSugarClient = unitOfWork.GetDbClient();
             //调式代码 用来打印SQL
             Db.Aop.OnLogExecuting = (sql, pars) =>
             {
@@ -21,6 +23,7 @@ namespace VueShop.Repository
                     Db.Utilities.SerializeObject(pars.ToDictionary(it => it.ParameterName, it => it.Value)));
                 Console.WriteLine();
             };
+            _unitOfWork = unitOfWork;
         }
 
         //注意：不能写成静态的
@@ -29,11 +32,10 @@ namespace VueShop.Repository
         {
             get
             {
-                return sqlSugarClient as SqlSugarClient;
+                return _sqlSugarClient as SqlSugarClient;
             }
         }
 
-        private readonly ISqlSugarClient sqlSugarClient;
 
         #region 表属性
 
