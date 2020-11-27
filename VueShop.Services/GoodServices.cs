@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using VueShop.IRepository;
+﻿using VueShop.IRepository;
 using VueShop.IServices;
 using VueShop.Model.DBModels;
 
@@ -9,12 +6,12 @@ namespace VueShop.Services
 {
     public class GoodServices : BaseServices<sp_goods>, IGoodServices
     {
-        private IGoodRepository goodRepository;
+        private readonly IBaseRepository<sp_goods> _goodRepository;
 
-        public GoodServices(IGoodRepository goodRepository)
+        public GoodServices(IBaseRepository<sp_goods> goodRepository)
         {
-            this.goodRepository = goodRepository;
             base.baseRepository = goodRepository;
+            _goodRepository = goodRepository;
         }
     }
 }

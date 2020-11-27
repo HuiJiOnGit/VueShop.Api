@@ -7,7 +7,7 @@ using VueShop.IServices;
 
 namespace VueShop.Services
 {
-    public class BaseServices<TEntity> : IBaseServices<TEntity> where TEntity : class, new()
+    public class BaseServices<TEntity> : IBaseServices<TEntity> where TEntity : class
     {
         public IBaseRepository<TEntity> baseRepository;
 

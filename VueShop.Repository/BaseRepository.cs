@@ -16,13 +16,6 @@ namespace VueShop.Repository
         public BaseRepository(IUnitOfWork unitOfWork)
         {
             _sqlSugarClient = unitOfWork.GetDbClient();
-            //调式代码 用来打印SQL
-            Db.Aop.OnLogExecuting = (sql, pars) =>
-            {
-                Console.WriteLine(sql + "\r\n" +
-                    Db.Utilities.SerializeObject(pars.ToDictionary(it => it.ParameterName, it => it.Value)));
-                Console.WriteLine();
-            };
             _unitOfWork = unitOfWork;
         }
 
@@ -32,6 +25,13 @@ namespace VueShop.Repository
         {
             get
             {
+                //调式代码 用来打印SQL
+                _sqlSugarClient.Aop.OnLogExecuting = (sql, pars) =>
+                {
+                    Console.WriteLine(sql + "\r\n" +
+                        Db.Utilities.SerializeObject(pars.ToDictionary(it => it.ParameterName, it => it.Value)));
+                    Console.WriteLine();
+                };
                 return _sqlSugarClient as SqlSugarClient;
             }
         }

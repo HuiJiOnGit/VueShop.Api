@@ -9,12 +9,12 @@ namespace VueShop.Services
 {
     public class ReportServices : BaseServices<sp_report_1>, IReportServices
     {
-        private IReportRepository reportRepository;
+        private readonly IBaseRepository<sp_report_1> _reportRepository;
 
-        public ReportServices(IReportRepository reportRepository)
+        public ReportServices(IBaseRepository<sp_report_1> reportRepository)
         {
-            this.reportRepository = reportRepository;
             base.baseRepository = reportRepository;
+            _reportRepository = reportRepository;
         }
     }
 }

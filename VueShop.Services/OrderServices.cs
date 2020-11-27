@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using VueShop.IRepository;
+﻿using VueShop.IRepository;
 using VueShop.IServices;
 using VueShop.Model.DBModels;
 
@@ -9,12 +6,12 @@ namespace VueShop.Services
 {
     internal class OrderServices : BaseServices<sp_order>, IOrderServices
     {
-        private IOrderRepository orderRepository;
+        private readonly IBaseRepository<sp_order> _orderRepository;
 
-        public OrderServices(IOrderRepository orderRepository)
+        public OrderServices(IBaseRepository<sp_order> orderRepository)
         {
-            this.orderRepository = orderRepository;
             base.baseRepository = orderRepository;
+            _orderRepository = orderRepository;
         }
     }
 }

@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VueShop.IRepository", "VueS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VueShop.IServices", "VueShop.IServices\VueShop.IServices.csproj", "{5496E9C3-5592-4D00-9D87-FFCB41FE05C8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VueShop.Extensions", "VueShop.Extensions\VueShop.Extensions.csproj", "{9D695620-D69C-4543-908F-5767F89C286D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{5496E9C3-5592-4D00-9D87-FFCB41FE05C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5496E9C3-5592-4D00-9D87-FFCB41FE05C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5496E9C3-5592-4D00-9D87-FFCB41FE05C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D695620-D69C-4543-908F-5767F89C286D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D695620-D69C-4543-908F-5767F89C286D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D695620-D69C-4543-908F-5767F89C286D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D695620-D69C-4543-908F-5767F89C286D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

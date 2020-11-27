@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using VueShop.Api.AuthorizationHelper.Jwt;
@@ -19,7 +14,7 @@ namespace VueShop.Api.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-        private readonly IUserServices userServices;
+        private readonly IUserServices _userServices;
         private readonly ILogger<LoginController> logger;
         private readonly JwtHelper jwtHelper;
 
@@ -31,7 +26,7 @@ namespace VueShop.Api.Controllers
         /// <param name="jwtHelper"></param>
         public LoginController(IUserServices userServices, ILogger<LoginController> logger, JwtHelper jwtHelper)
         {
-            this.userServices = userServices;
+            _userServices = userServices;
             this.logger = logger;
             this.jwtHelper = jwtHelper;
         }
@@ -48,7 +43,7 @@ namespace VueShop.Api.Controllers
             {
                 return BadRequest();
             }
-            var user = await userServices.GetUser(loginViewModel);
+            var user = await _userServices.GetUser(loginViewModel);
             if (user != null)
             {
                 string result = $"Beaner {jwtHelper.CreateJwt(user.UserName)}";

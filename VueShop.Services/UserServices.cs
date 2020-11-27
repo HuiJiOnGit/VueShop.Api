@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
 using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
 using VueShop.Common.Helper;
 using VueShop.IRepository;
 using VueShop.IServices;
@@ -15,17 +11,17 @@ namespace VueShop.Services
 {
     public class UserServices : BaseServices<sp_manager>, IUserServices
     {
-        private IUserRepository userRepository;
+        private readonly IBaseRepository<sp_manager> _userRepository;
 
-        public UserServices(IUserRepository userRepository)
+        public UserServices(IBaseRepository<sp_manager> userRepository)
         {
-            this.userRepository = userRepository;
             base.baseRepository = userRepository;
+            _userRepository = userRepository;
         }
 
         public async Task<LoginViewModel> GetUser(LoginViewModel loginViewModel)
         {
-            var user = (await userRepository.Query(n => n.mg_name == loginViewModel.UserName)).FirstOrDefault();
+            var user = (await _userRepository.Query(n => n.mg_name == loginViewModel.UserName)).FirstOrDefault();
 
             if (user == null)
             {

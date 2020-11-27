@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using VueShop.IRepository;
+﻿using VueShop.IRepository;
 using VueShop.IServices;
 using VueShop.Model.DBModels;
 
@@ -9,12 +6,12 @@ namespace VueShop.Services
 {
     public class PermissionServices : BaseServices<sp_permission>, IPermissionServices
     {
-        private IPermissionRepository permissionRepository;
+        private readonly IBaseRepository<sp_permission> _permissionRepository;
 
-        public PermissionServices(IPermissionRepository permissionRepository)
+        public PermissionServices(IBaseRepository<sp_permission> permissionRepository)
         {
-            this.permissionRepository = permissionRepository;
             base.baseRepository = permissionRepository;
+            _permissionRepository = permissionRepository;
         }
     }
 }

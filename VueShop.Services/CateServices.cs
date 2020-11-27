@@ -6,12 +6,13 @@ namespace VueShop.Services
 {
     public class CateServices : BaseServices<sp_category>, ICateServices
     {
-        private ICateRepository CateRepository;
+        private readonly IBaseRepository<sp_category> _cateRepository;
 
-        public CateServices(ICateRepository cateRepository)
+        public CateServices(IBaseRepository<sp_category> cateRepository)
         {
-            this.CateRepository = cateRepository;
+
             base.baseRepository = cateRepository;
+            _cateRepository = cateRepository;
         }
     }
 }
